@@ -22,6 +22,24 @@
 ```
 ![交互式脚本使用形式](https://i-blog.csdnimg.cn/direct/28829e783be941559e4c9a8408fc92da.png#pic_center)
 
+### Qing-long QuickInstall 安装方式
+```bash
+# 进入Qinglong所在的系统下，任意目录即可，无需进入ql主目录
+# 公共库
+vtime = "20240926"
+wget https://github.com/aspnmy/qinglong/releases/download/t-${vtime}/check_dist
+# 配置执行权限
+chmod +x  ./check_dist
+
+# 查看交互命令帮助文件
+./check_dist help
+
+# 执行指定的依赖安装，比如安装node历史依赖
+# 运行下面命令就行
+./check_dist install_nodejs_dist
+
+```
+
 
 ### Qing-long dist 安装方式
 ```bash
