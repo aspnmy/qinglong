@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 ## bizCode bizMsg lxml 三个依赖只有老脚本才需要使用
-## 新脚本基本都不在使用，是否安装按需安装
+## 新脚本基本都不在使用,是否安装按需安装
   # 先用ql内置的面板环境检查命令'ql check'先检查一下面板环境
   # 然后再运行此脚本
   # 此脚本安装的依赖包含了以前的老脚本依赖
-  # 如果脚本库中使用的是2020年以后的脚本，有些依赖就多余了
-  # 推荐按需安装依赖，如果实在不清楚脚本用了什么依赖
+  # 如果脚本库中使用的是2020年以后的脚本,有些依赖就多余了
+  # 推荐按需安装依赖,如果实在不清楚脚本用了什么依赖
   # 才傻瓜的安装这个脚本
   # 本脚本的代码可以直接复制粘贴到 extra.sh中
   # 就可以用ql内置命令 ql extra 直接运行
-  # 考虑到extra.sh可能还会自定义其他脚本，所以才单独做了一个sh文件
+  # 考虑到extra.sh可能还会自定义其他脚本,所以才单独做了一个sh文件
 ## 使用命令：
 ## cd /ql/shell/
 ## chmod +x check_dist.sh
 ##  check_dist.sh help  查询脚本命令
-##  check_dist.sh install_onec 安装常用依赖（包含老脚本依赖，但不包含bizCode bizMsg lxml
+##  check_dist.sh install_onec 安装常用依赖（包含老脚本依赖,但不包含bizCode bizMsg lxml
 ##  check_dist.sh install_nodejs_dist 安装qinglong-nodejs依赖
 ##  check_dist.sh install_python_dist 安装qinglong-python依赖
 ##  check_dist.sh install_linux_dist 安装bizCode bizMsg lxml依赖
@@ -35,7 +35,7 @@ reset_linux_dist() {
 }
 
 reset_npm_res_cn(){
-#无论系统使用什么源，，强制更新成国内源
+#无论系统使用什么源,强制更新成国内源
   npm config set registry https://registry.npmmirror.com
   npm cache clean --force
   npm cache verify
