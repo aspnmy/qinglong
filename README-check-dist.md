@@ -1,7 +1,7 @@
-<div align="center">
+
 <img width="100" src="https://user-images.githubusercontent.com/22700758/191449379-f9f56204-0e31-4a16-be5a-331f52696a73.png">
 
-<h1 align="center">Qinglong</h1>
+<h1 >Qinglong</h1>
 
 
 
