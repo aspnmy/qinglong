@@ -10,18 +10,27 @@
   # 本脚本的代码可以直接复制粘贴到 extra.sh中
   # 就可以用ql内置命令 ql extra 直接运行
   # 考虑到extra.sh可能还会自定义其他脚本，所以才单独做了一个sh文件
-
+## 使用命令：
+## cd /ql/shell/
+##  check_dist help  查询脚本命令
+##  check_dist install_onec 安装常用依赖（包含老脚本依赖，但不包含bizCode bizMsg lxml
+##  check_dist install_nodejs_dist 安装qinglong-nodejs依赖
+##  check_dist install_python_dist 安装qinglong-python依赖
+##  check_dist install_linux_dist 安装bizCode bizMsg lxml依赖
+##  check_dist install_base 修复qinglong-组件环境
 reset_nodejs_dist() {
   pnpm install -g crypto-js prettytable dotenv jsdom date-fns tough-cookie tslib ws@7.4.3 ts-md5 jsdom -g jieba fs form-data json5 global-agent png-js @types/node require typescript js-base64 axios moment ds
-}
+  exit
 
 reset_python_dist() {
   pip install  requests canvas ping3 jieba aiohttp
   pip3 install  requests canvas ping3 jieba aiohttp
+  exit
 }
 
 reset_linux_dist() {
   apk add bizCode bizMsg lxml
+  exit
 }
 
 reset_npm_res_cn(){
@@ -31,13 +40,14 @@ reset_npm_res_cn(){
   npm cache verify
   pip install requests -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-
+  exit
 }
 
 reset_npm_pm2_node(){
   echo -e "=====> ............"
   npm i -g pnpm@8.3.1 pm2 ts-node
   patch_version
+  exit
 }
 
 
@@ -51,14 +61,40 @@ reset_python_dist
 
 
 
+echo -e "=====> 请根据脚本提示选择需要安装的依赖"
 
-main() {
-  echo -e "=====> 开始安装qinglong依赖一键脚本，本脚本包含很多老旧的依赖，如果使用新脚本可以不安装，实在不清楚脚本库是否需要才安装"
+case "$1" in
+   install_onec)
+       check_dist
+       ;;
+   install_nodejs_dist)
+       reset_npm_res_cn
+       reset_nodejs_dist
+       ;;
+   install_python_dist)
+       reset_npm_res_cn
+       reset_python_dist
+       ;;
+   install_linux_dist)
+       reset_linux_dist
+       ;;
+   install_base)
+       reset_npm_pm2_node
+       ;;
+
+   *)
+       echo  $"Usage: $0 {
+       输入install_onec(安装常用依赖（包含老脚本依赖，但不包含bizCode bizMsg lxml）)
+       |输入install_nodejs_dist(安装qinglong-nodejs依赖)
+       |输入install_python_dist(安装qinglong-python依赖)
+       |输入install_linux_dist(安装bizCode bizMsg lxml依赖)
+       |输入install_base(修复qinglong-组件环境)
+       }
+esac
 
 
-  check_dist
 
-  echo -e "\n=====> 安装结束\n"
-}
 
-main
+
+
+
