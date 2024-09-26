@@ -27,11 +27,21 @@
 # 进入ql主目录，容器下也是一样的
 cd /ql/shell
 # 下载脚本文件
-wget https://raw.githubusercontent.com/aspnmy/qinglong/refs/heads/install_dist/shell/check_dist.sh
+wget https://raw.githubusercontent.com/aspnmy/qinglong/refs/heads/install_dist/shell/check_dist
 # 配置执行权限
-chmod +x check_dist.sh
-# 按提示执行脚本
-./check_dist.sh
+chmod +x check_dist
+# 按提示执行脚本 查询脚本命令说明
+./check_dist help
+##  check_dist install_onec 安装常用依赖（包含老脚本依赖，但不包含bizCode bizMsg lxml
+./check_dist install_onec
+##  check_dist install_nodejs_dist 安装qinglong-nodejs依赖
+./check_dist install_nodejs_dist
+##  check_dist install_python_dist 安装qinglong-python依赖
+./check_dist install_python_dist
+##  check_dist install_linux_dist 安装bizCode bizMsg lxml依赖
+./check_dist install_linux_dist
+##  check_dist install_base 修复qinglong-组件环境
+./check_dist install_base
 
 ```
 
