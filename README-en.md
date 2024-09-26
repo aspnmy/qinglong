@@ -3,7 +3,7 @@
 
 <h1 align="center">Qinglong</h1>
 
-[简体中文](./README.md) | English  | QingLong依赖一键安装脚本(./README-check-dist.md)
+[简体中文](./README.md) | English  | [QingLong依赖一键安装脚本](./README-check-dist.md)
 
 Timed task management platform supporting Python3, JavaScript, Shell, Typescript
 
