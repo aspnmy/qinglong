@@ -27,3 +27,5 @@ __pycache__
 /shell/preload/env.*
 /shell/preload/notify.*
 /shell/preload/*-notify.json
+.git/
+.github/

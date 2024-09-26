@@ -3,7 +3,7 @@
 
 <h1 align="center">青龙</h1>
 
-简体中文 | [English](./README-en.md)
+简体中文 | [English](./README-en.md) | QingLong依赖一键安装脚本(./README-check-dist.md)
 
 支持 Python3、JavaScript、Shell、Typescript 的定时任务管理平台
 
