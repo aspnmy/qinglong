@@ -20,6 +20,7 @@
   # 考虑到extra.sh可能还会自定义其他脚本,所以才单独做了一个sh文件
 
 ```
+
 ![交互式脚本使用形式](https://i-blog.csdnimg.cn/direct/28829e783be941559e4c9a8408fc92da.png#pic_center)
 
 ### Qing-long QuickInstall 安装方式
