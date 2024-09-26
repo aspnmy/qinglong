@@ -12,12 +12,13 @@
   # 考虑到extra.sh可能还会自定义其他脚本，所以才单独做了一个sh文件
 ## 使用命令：
 ## cd /ql/shell/
-##  check_dist help  查询脚本命令
-##  check_dist install_onec 安装常用依赖（包含老脚本依赖，但不包含bizCode bizMsg lxml
-##  check_dist install_nodejs_dist 安装qinglong-nodejs依赖
-##  check_dist install_python_dist 安装qinglong-python依赖
-##  check_dist install_linux_dist 安装bizCode bizMsg lxml依赖
-##  check_dist install_base 修复qinglong-组件环境
+## chmod +x check_dist.sh
+##  check_dist.sh help  查询脚本命令
+##  check_dist.sh install_onec 安装常用依赖（包含老脚本依赖，但不包含bizCode bizMsg lxml
+##  check_dist.sh install_nodejs_dist 安装qinglong-nodejs依赖
+##  check_dist.sh install_python_dist 安装qinglong-python依赖
+##  check_dist.sh install_linux_dist 安装bizCode bizMsg lxml依赖
+##  check_dist.sh install_base 修复qinglong-组件环境
 reset_nodejs_dist() {
   pnpm install -g crypto-js prettytable dotenv jsdom date-fns tough-cookie tslib ws@7.4.3 ts-md5 jsdom -g jieba fs form-data json5 global-agent png-js @types/node require typescript js-base64 axios moment ds
   exit
@@ -56,6 +57,7 @@ reset_npm_res_cn
 reset_nodejs_dist
 reset_python_dist
 #reset_linux_dist
+exit
 }
 
 
@@ -84,11 +86,11 @@ case "$1" in
 
    *)
        echo  $"Usage: $0 {
-       输入install_onec(安装常用依赖（包含老脚本依赖，但不包含bizCode bizMsg lxml）)
-       |输入install_nodejs_dist(安装qinglong-nodejs依赖)
-       |输入install_python_dist(安装qinglong-python依赖)
-       |输入install_linux_dist(安装bizCode bizMsg lxml依赖)
-       |输入install_base(修复qinglong-组件环境)
+       "输入install_onec(安装常用依赖-包含老脚本依赖,但不包含bizCode bizMsg lxml)",
+       "输入install_nodejs_dist(安装qinglong-nodejs依赖)",
+       "输入install_python_dist(安装qinglong-python依赖)",
+       "输入install_linux_dist(安装bizCode bizMsg lxml依赖)",
+       "输入install_base(修复qinglong-组件环境)"
        }
 esac
 
