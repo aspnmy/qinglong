@@ -1,102 +1,64 @@
 #!/usr/bin/env bash
-## 常用 nodejs依赖  pnpm install -g crypto-js prettytable dotenv jsdom date-fns tough-cookie tslib ws@7.4.3 ts-md5 jsdom -g jieba fs form-data json5 global-agent png-js @types/node require typescript js-base64 axios moment ds
-## 常用 python依赖  pnpm install -g requests canvas ping3 jieba aiohttp
-## 常用 linux依赖 pnpm install -g bizCode bizMsg lxml
+## bizCode bizMsg lxml 三个依赖只有老脚本才需要使用
+## 新脚本基本都不在使用，是否安装按需安装
+  # 先用ql内置的面板环境检查命令'ql check'先检查一下面板环境
+  # 然后再运行此脚本
+  # 此脚本安装的依赖包含了以前的老脚本依赖
+  # 如果脚本库中使用的是2020年以后的脚本，有些依赖就多余了
+  # 推荐按需安装依赖，如果实在不清楚脚本用了什么依赖
+  # 才傻瓜的安装这个脚本
+  # 本脚本的代码可以直接复制粘贴到 extra.sh中
+  # 就可以用ql内置命令 ql extra 直接运行
+  # 考虑到extra.sh可能还会自定义其他脚本，所以才单独做了一个sh文件
+
 reset_nodejs_dist() {
   pnpm install -g crypto-js prettytable dotenv jsdom date-fns tough-cookie tslib ws@7.4.3 ts-md5 jsdom -g jieba fs form-data json5 global-agent png-js @types/node require typescript js-base64 axios moment ds
 }
 
 reset_python_dist() {
-  pnpm install -g pnpm install -g requests canvas ping3 jieba aiohttp
+  pip install  requests canvas ping3 jieba aiohttp
+  pip3 install  requests canvas ping3 jieba aiohttp
 }
 
 reset_linux_dist() {
-  pnpm install -g bizCode bizMsg lxml
+  apk add bizCode bizMsg lxml
 }
 
-check_dist() {
-package_name="date-fns axios ts-node typescript png-js crypto-js md5 dotenv got ts-md5 tslib @types/node requests tough-cookie jsdom download tunnel fs ws js-base64 jieba canvas crypto-js prettytable dotenv jsdom date-fns tough-cookie tslib ws@7.4.3 ts-md5 jsdom -g jieba fs form-data json5 global-agent png-js @types/node require typescript js-base64 axios moment ds requests canvas ping3 jieba aiohttp bizCode bizMsg lxml"
-
-for i in $package_name; do
-    case $i in
-        canvas)
-            cd /ql/data/scripts
-            pnpm ls $i
-            echo -e $i
-            ;;
-        *)
-            pnpm ls $i -g
-            echo -e $i
-            ;;
-    esac
-done
-
-
+reset_npm_res_cn(){
+#无论系统使用什么源，，强制更新成国内源
+  npm config set registry https://registry.npmmirror.com
+  npm cache clean --force
+  npm cache verify
+  pip install requests -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 
 }
 
-pm2_log() {
-  echo -e "---> pm2日志"
-  local panelOut="/root/.pm2/logs/panel-out.log"
-  local panelError="/root/.pm2/logs/panel-error.log"
-  tail -n 300 "$panelOut"
-  tail -n 300 "$panelError"
-}
-
-check_nginx() {
-  local nginxPid=$(ps -eo pid,command | grep nginx | grep -v grep)
-  echo -e "=====> 检测nginx服务\n$nginxPid"
-  if [[ $nginxPid ]]; then
-    echo -e "\n=====> nginx服务正常\n"
-    nginx -s reload
-  else
-    echo -e "\n=====> nginx服务异常，重新启动nginx\n"
-    nginx -c /etc/nginx/nginx.conf
-  fi
-}
-
-check_ql() {
-  local api=$(curl -s --noproxy "*" "http://0.0.0.0:5700")
-  echo -e "\n=====> 检测面板\n\n$api\n"
-  if [[ $api =~ "<div id=\"root\"></div>" ]]; then
-    echo -e "=====> 面板服务启动正常\n"
-  fi
-}
-
-check_pm2() {
-  pm2_log
-  local currentTimeStamp=$(date +%s)
-  local api=$(
-    curl -s --noproxy "*" "http://0.0.0.0:5600/api/system?t=$currentTimeStamp" \
-      -H 'Accept: */*' \
-      -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36' \
-      -H 'Referer: http://0.0.0.0:5700/crontab' \
-      -H 'Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7' \
-      --compressed
-  )
-  echo -e "\n=====> 检测后台\n\n$api\n"
-  if [[ $api =~ "{\"code\"" ]]; then
-    echo -e "=====> 后台服务启动正常\n"
-  fi
-}
-
-main() {
-  echo -e "=====> 开始检测"
+reset_npm_pm2_node(){
+  echo -e "=====> ............"
   npm i -g pnpm@8.3.1 pm2 ts-node
   patch_version
+}
+
+
+check_dist() {
+reset_npm_res_cn
+reset_nodejs_dist
+reset_python_dist
+#reset_linux_dist
+}
+
+
+
+
+
+main() {
+  echo -e "=====> 开始安装qinglong依赖一键脚本，本脚本包含很多老旧的依赖，如果使用新脚本可以不安装，实在不清楚脚本库是否需要才安装"
+
 
   check_dist
-  #reset_nodejs_dist
-  #reset_python_dist
-  #reset_linux_dist
 
-  check_ql
-  check_nginx
-  check_pm2
-  #reload_update
-  reload_pm2
-  echo -e "\n=====> 检测结束\n"
+  echo -e "\n=====> 安装结束\n"
 }
 
 main
