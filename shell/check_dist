@@ -22,7 +22,7 @@
 reset_nodejs_dist() {
   pnpm install -g crypto-js prettytable dotenv jsdom date-fns tough-cookie tslib ws@7.4.3 ts-md5 jsdom -g jieba fs form-data json5 global-agent png-js @types/node require typescript js-base64 axios moment ds
   exit
-
+}
 reset_python_dist() {
   pip install  requests canvas ping3 jieba aiohttp
   pip3 install  requests canvas ping3 jieba aiohttp
